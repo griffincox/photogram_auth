@@ -7,4 +7,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     render "users/show.html.erb"
   end
+  def likes
+    @likes = current_user.likes
+    render "users/likes.html.erb"
+  end
 end
