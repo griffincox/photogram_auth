@@ -50,7 +50,9 @@ Rails.application.routes.draw do
   # DELETE
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
-
   devise_for :users
+  get "/users/:id", :controller => "users", :action => "show"
+  get "/users/", :controller => "users", :action => "index"
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
