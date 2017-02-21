@@ -18,6 +18,50 @@
           <p>
             <%= photo.caption %>
           </p>
+          <ul class="media-list">
+            <% photo.comments.each do |comment| %>
+            <li class="media">
+              <div class="media-body">
+                <h6 class="media-heading">
+                  <a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+                  <small>
+                    <%= time_ago_in_words(comment.updated_at) %>
+                  </small>
+                </h6>
+                <%= comment.body %>
+              </div>
+            </li>
+            <% end %>
+            <li class="media">
+              <div class="media-body">
+                <form action="/create_comment" method="post">
+                  <!-- Hidden input for authenticity token to protect from forgery -->
+                  <input name="authenticity_token" type="hidden" value="klpA42hmXLzR/rSMCfMrSlOScfH0A9wo7FbmBQuOKYEft3KlKO4XYNWwFKoHVL03BggW0vsSXN21nHFx8YnRbA==">
+
+                  <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+                  <!-- Label and input for body -->
+                  <div class="form-group">
+                    <label for="body" class="sr-only">
+                      Body
+                    </label>
+
+                    <div class="input-group">
+                      <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment..." required>
+
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                          <i class="fa fa-commenting-o"></i>
+                        </button>
+                      </span>
+                    </div><!-- /input-group -->
+                  </div>
+                </form>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     <% end %>
