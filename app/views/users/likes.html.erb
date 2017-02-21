@@ -1,8 +1,25 @@
 <div class="row">
-  <h3>My Likes</h3>
-  <ul>
+  <div class="col-md-12">
+    <h3>My Likes</h3>
     <% @likes.each do |like| %>
-      <img src="<%= like.photo.image %>" alt="">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="/users/<%= like.photo.user_id %>"><%= like.photo.caption %></a>
+            <small>
+              Added about <%= time_ago_in_words(like.photo.updated_at) %> ago
+            </small>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <a href="/users/<%= like.photo.user_id %>">
+            <img src="<%= like.photo.image %>" alt="" class="img-responsive">
+          </a>
+          <p>
+            <%= like.photo.caption %>
+          </p>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
 </div>

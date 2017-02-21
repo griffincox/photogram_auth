@@ -1,6 +1,25 @@
 <div class="row">
-  <h3><%= @user.username %></h3>
-  <% @user.photos.each do |photo| %>
-    <img src="<%= photo.image %>" alt="">
-  <% end %>
+  <div class="col-md-12">
+    <h3><%= @user.username %></h3>
+    <% @user.photos.each do |photo| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="/users/<%= photo.user_id %>"><%= photo.caption %></a>
+            <small>
+              Added about <%= time_ago_in_words(photo.updated_at) %> ago
+            </small>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <a href="/users/<%= photo.user_id %>">
+            <img src="<%= photo.image %>" alt="" class="img-responsive">
+          </a>
+          <p>
+            <%= photo.caption %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
